@@ -25,4 +25,14 @@ export class AuthService {
 
     return this.http.post<any>(endpoint, JSON.stringify(body), { headers: headers })
   }
+  
+  // *************************** para obtener todos los usuarios ****************************************************
+  getMyProfile() : Observable<any>{
+    const endpoint = `${this.apiUrl}/auth/me`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('Token')
+    })
+    return this.http.get<any>(endpoint, { headers: headers })
+  }
 }
