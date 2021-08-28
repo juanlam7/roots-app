@@ -8,12 +8,12 @@ import { NoAuthGuard } from '../guards/no-auth.guard';
 const routes: Routes = [
   {
     path: '',
-    //canActivate: [NoAuthGuard],
+    canActivate: [NoAuthGuard],
     children: [
       { path: '', component: LoginComponent }
     ]
-  },
-  { path: '**', redirectTo: '' }
+  }/* ,
+  { path: '**', redirectTo: '' } */
 ]
 
 @NgModule({

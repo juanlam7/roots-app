@@ -1,0 +1,33 @@
+.container-fluid{
+    background-image: url('../../../assets/images/fondo.PNG');
+    background-repeat: center no-repeat;
+    background-size: 100% 100%;
+    .card{
+        border-radius: 10px;
+        background-color: rgb(250, 250, 250);
+        opacity: 1;
+        .btn-gplus, .btn-fb, .btn-li {
+            background: white;
+        }
+        .log_button{
+            width: 80%;
+            border-radius: 25px;
+        }
+        .border_bottom{
+            border-top: 1px solid lightgrey;
+        }
+        .input_icons{
+            margin-bottom: 20px;
+        }
+        mat-form-field{
+            border: 1px solid black;
+            border-radius: 25px;
+            input{
+                margin-bottom: 8px;
+            }
+            mat-error{
+                color: red;
+            }
+        }
+    }
+}
