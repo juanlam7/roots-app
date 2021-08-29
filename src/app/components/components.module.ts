@@ -9,13 +9,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 
-import { ListJobsComponent } from './list-jobs/list-jobs.component';
 import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
   declarations: [
-    ListJobsComponent,
     ProfileComponent
   ],
   imports: [
@@ -28,7 +26,6 @@ import { ProfileComponent } from './profile/profile.component';
     MatListModule
   ],
   exports: [
-    ListJobsComponent,
     ProfileComponent
   ]
 })
