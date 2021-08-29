@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { JobsService } from 'src/app/services/jobs.service';
 
 declare var google: any;
+declare var Pushbar: any
 
 @Component({
   selector: 'app-map',
@@ -12,20 +13,31 @@ declare var google: any;
 })
 export class MapComponent implements OnInit {
 
-  map = null;
+  public pushbar:any
+  public boxShadow = false
+
+  map:any;
   markers: Marker[] = [];
 
   constructor(private authService: AuthService, private jobsService: JobsService) { }
 
   ngOnInit() {
+    this.pushbar = new Pushbar({
+			blur: false,
+			overlay: false,
+		});
+
     this.loadMap();
     this.jobsData();
   }
 
+  asideClicked(){
+    this.pushbar.close()
+    this.boxShadow = !this.boxShadow
+  }
+
   loadMap() {
-
     const mapEle: any | HTMLElement = document.getElementById('map');
-
     const myLatLng = {lat: 10.491, lng: -66.902};
     // create map
     this.map = new google.maps.Map(mapEle, {
@@ -37,11 +49,6 @@ export class MapComponent implements OnInit {
       //this.renderMarkers();
       mapEle.classList.add('show-map');
     });
-
-    google.maps.event.addListenerOnce(this.map, 'click', (mapsMouseEvent: any) => {
-      //this.renderMarkers();
-      console.log(JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2))
-    });
   }
 
   renderMarkers() {
@@ -51,11 +58,24 @@ export class MapComponent implements OnInit {
   }
 
   addMarker(marker: Marker) {
-    return new google.maps.Marker({
+    let job = new google.maps.Marker({
       position: { lat: parseFloat(marker.latitude), lng: parseFloat(marker.longitude) },
       map: this.map,
       title: marker.title
     });
+
+    let infowindow = new google.maps.InfoWindow({
+      content: 'Nombre: ' + marker.title + '</br> Latitude: ' + marker.latitude + '</br> Longitude: ' + marker.longitude
+    });
+    job.addListener('click', () => {
+      infowindow.open(this.map, job);
+    });
+  }
+
+  setJobb(lpf:any){
+    const centrado = {lat: parseFloat(lpf.latitude), lng: parseFloat(lpf.longitude)};
+    this.map.setCenter(centrado)
+    this.map.setZoom(6);
   }
 
   jobsData() {

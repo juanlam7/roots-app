@@ -1,1 +1,25 @@
 <div id="map"></div>
+
+<div id="test">
+    <aside data-pushbar-id="left" data-pushbar-direction="left" class="sidebar-left pt-5"
+        style="background-color: transparent"
+        [ngStyle]="{'box-shadow':(boxShadow) ? '3px 1px 5px 0px rgba(0,0,0,0.75)' : 'none'}" (click)="asideClicked()">
+
+        <h2 class="list-title" >Lista de trabajos</h2>
+        <ul class="list-group">
+            <li *ngFor="let job of markers" class="list-group-item" (click)="setJobb(job)">
+                <img [src]="job.image" width="24" height="24" alt="img">
+                {{job.title}}
+            </li>
+        </ul>
+
+        <!-- <button class="btn btn-danger mt-5" shape="round" data-pushbar-close>
+            Cerrar
+        </button> -->
+    </aside>
+
+    <button class="btn btn-danger" (click)="boxShadow = !boxShadow" expand="block" fill="clear" shape="round"
+        data-pushbar-target="left">
+        Ver lista de trabajos
+    </button>
+</div>

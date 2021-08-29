@@ -7,5 +7,6 @@ export interface UserSignUp {
 export interface Marker {
     latitude: string,
     longitude: string,
-    title: string;
+    title: string,
+    image: string
   }
