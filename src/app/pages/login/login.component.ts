@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     // init loading
     const { email, password } = this.loginForm.value;
     this.authService.login(email, password).subscribe((resp)=>{
-      console.log(resp)
+      //console.log(resp)
       // dismiss loading
       if(resp.access_token) {
         localStorage.setItem('Token', resp.access_token);

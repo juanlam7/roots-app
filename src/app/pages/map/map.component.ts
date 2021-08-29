@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Marker } from 'src/app/interfaces/interfaces';
 import { AuthService } from 'src/app/services/auth.service';
 import { JobsService } from 'src/app/services/jobs.service';
+import { Router } from '@angular/router';
 
 declare var google: any;
 declare var Pushbar: any
@@ -13,8 +14,10 @@ declare var Pushbar: any
 })
 export class MapComponent implements OnInit {
 
-  public pushbar:any
-  public boxShadow = false
+  public pushbar:any;
+  public boxShadow = false;
+
+  public showModal: boolean = false;
 
   public currentPage: number = 1;
   public pageSize: number = 0;
@@ -22,7 +25,7 @@ export class MapComponent implements OnInit {
   map:any;
   markers: Marker[] = [];
 
-  constructor(private authService: AuthService, private jobsService: JobsService) { }
+  constructor(private authService: AuthService, private jobsService: JobsService, private _router: Router) { }
 
   ngOnInit() {
     this.pushbar = new Pushbar({
@@ -75,24 +78,27 @@ export class MapComponent implements OnInit {
     });
   }
 
-  setJobb(lpf:any){
+  setJobb(lpf:any, type?:any){
     const centrado = {lat: parseFloat(lpf.latitude), lng: parseFloat(lpf.longitude)};
     this.map.setCenter(centrado)
-    this.map.setZoom(6);
+    if(type === 'user') {
+      this.map.setZoom(12);
+    } else {
+      this.map.setZoom(6);
+    }
   }
 
   jobsData(type:any = '') {
     if(type === 'previous') {
-      console.log('previous')
+      // console.log('previous')
       this.currentPage--
       this.jobsService.getJobs(this.currentPage).subscribe((res) => {
         this.markers = res.data;
-        console.log(res.data)
+        // console.log(res.data)
         this.renderMarkers();
       })
     } else if (type === 'next') {
-      console.log('next')
-      console.log(this.markers.length)
+      // console.log('next')
       this.currentPage++
       this.jobsService.getJobs(this.currentPage).subscribe((res) => {
         this.markers = res.data;
@@ -100,11 +106,37 @@ export class MapComponent implements OnInit {
         this.renderMarkers();
       })
     } else if (type === 'init') {
-      console.log('init')
+      // console.log('init')
       this.jobsService.getJobs(this.currentPage).subscribe((res) => {
         this.markers = res.data;
         this.renderMarkers();
       })
     }
+  }
+
+  parentCloseModal(resp:any) {
+    let saveResp = resp;
+    let checkType = typeof saveResp;
+    if (checkType === 'string') {
+      this.showModal = false;
+    } else {
+      this.userMark(resp)
+      this.showModal = false;
+    }
+  }
+
+  userMark(marker: Marker) {
+    this.setJobb(marker, 'user')
+    return new google.maps.Marker({
+      position: { lat: marker.latitude, lng: marker.longitude },
+      map: this.map,
+      title: 'Aquí estas',
+      icon: '../../../assets/icons/circle3.png'
+    });
+  }
+
+  loguot() {
+    localStorage.clear();
+    this._router.navigate(['/']);
   }
 }
