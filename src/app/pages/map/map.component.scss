@@ -11,10 +11,8 @@
 }
 #test {
   position:absolute;
-  left: 5%;
-  //top: 5%;
-  bottom: 5%;
-  //right: 0px;
+  left: 2%;
+  top: 15%;
   z-index:3;
   background: transparent;
   height: 80px;
@@ -25,8 +23,6 @@
     border-radius: 0px;
     .list-group-item{
       padding-left: 30px;
-      background-color: rgba(255, 255, 255, 0.699);
-      backdrop-filter: blur(10px);
     }
   }
   .btn{
@@ -36,5 +32,8 @@
     margin: 10px;
     color: black;
     font-weight: bold;
+  }
+  .pagination{
+    margin: 10px;
   }
 }

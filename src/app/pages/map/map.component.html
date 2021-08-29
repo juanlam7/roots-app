@@ -2,10 +2,11 @@
 
 <div id="test">
     <aside data-pushbar-id="left" data-pushbar-direction="left" class="sidebar-left pt-5"
-        style="background-color: transparent"
-        [ngStyle]="{'box-shadow':(boxShadow) ? '3px 1px 5px 0px rgba(0,0,0,0.75)' : 'none'}" (click)="asideClicked()">
+        style="background-color: rgba(255, 255, 255, 0.445); backdrop-filter: blur(10px);"
+        [ngStyle]="{'box-shadow':(boxShadow) ? '3px 1px 5px 0px rgba(0,0,0,0.75)' : '3px 1px 5px 0px rgba(0,0,0,0.40)'}"
+        (click)="asideClicked()">
 
-        <h2 class="list-title" >Lista de trabajos</h2>
+        <h3 class="list-title">Lista de trabajos</h3>
         <ul class="list-group">
             <li *ngFor="let job of markers" class="list-group-item" (click)="setJobb(job)">
                 <img [src]="job.image" width="24" height="24" alt="img">
@@ -13,9 +14,26 @@
             </li>
         </ul>
 
-        <!-- <button class="btn btn-danger mt-5" shape="round" data-pushbar-close>
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" *ngIf="currentPage > 1">
+                  <a class="page-link" (click)="jobsData('previous')" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only"></span>
+                  </a>
+                </li>
+                <li class="page-item"><a class="page-link">{{currentPage}}</a></li>
+                <li class="page-item" *ngIf="pageSize != currentPage">
+                  <a class="page-link" (click)="jobsData('next')" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only"></span>
+                  </a>
+                </li>
+            </ul>
+        </nav>
+        <button class="btn btn-danger mt-5" shape="round" data-pushbar-close>
             Cerrar
-        </button> -->
+        </button>
     </aside>
 
     <button class="btn btn-danger" (click)="boxShadow = !boxShadow" expand="block" fill="clear" shape="round"
