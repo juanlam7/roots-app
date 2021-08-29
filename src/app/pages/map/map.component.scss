@@ -37,3 +37,16 @@
     margin: 10px;
   }
 }
+#modal {
+  background-color: rgba(255, 255, 255, 0.445); 
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index:3;
+  border-radius: 25px;
+  height: 35%;
+  width: 40%;
+}

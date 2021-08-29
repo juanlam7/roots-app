@@ -31,13 +31,34 @@
                 </li>
             </ul>
         </nav>
-        <button class="btn btn-danger mt-5" shape="round" data-pushbar-close>
-            Cerrar
-        </button>
+
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+              <div class="col-12 text-center">
+                <button class="btn btn-info mt-1" shape="round" data-pushbar-close (click)="showModal = !showModal">
+                    Datos de usuario
+                </button>
+              </div>
+              <div class="col-12 text-center">
+                <button class="btn btn-danger mt-1" shape="round" data-pushbar-close>
+                    Cerrar lista
+                </button>
+              </div>
+              <div class="col-12 text-center">
+                <button class="btn btn-warning mt-1" shape="round" data-pushbar-close (click)="loguot()">
+                    Cerrar sesión
+                </button>
+              </div>
+          </div>
+        </div>
     </aside>
 
     <button class="btn btn-danger" (click)="boxShadow = !boxShadow" expand="block" fill="clear" shape="round"
         data-pushbar-target="left">
         Ver lista de trabajos
     </button>
+</div>
+
+<div id="modal" *ngIf="showModal">
+  <app-profile (closeModal)="parentCloseModal($event)"></app-profile>
 </div>

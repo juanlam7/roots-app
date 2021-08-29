@@ -1,7 +1,7 @@
 export interface UserSignUp {
     email?: string;
     name?: string;
-    user_id?: number;
+    id?: number;
 }
 
 export interface Marker {
@@ -9,4 +9,4 @@ export interface Marker {
     longitude: string,
     title: string,
     image: string
-  }
+}

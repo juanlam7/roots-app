@@ -1,1 +1,42 @@
-<p>profile works!</p>
+<div class="container-fluid">
+    <h1 class="text-center">Mis Datos</h1>
+
+    <div class="row justify-content-center">
+
+        <div class="col-6 text-center">
+            Nombre:
+        </div>
+        <div class="col-6 text-center">
+            {{userData?.name}}
+        </div>
+
+        <div class="col-6 text-center mt-2">
+            Correo:
+        </div>
+        <div class="col-6 text-center mt-2">
+            {{userData?.email}}
+        </div>
+
+        <div class="col-6 text-center mt-2">
+            Mi ubicación:
+        </div>
+        <div class="col-6 text-center mt-2">
+            lat: {{userCoordenates?.latitude}}
+            <br>
+            lng: {{userCoordenates?.longitude}}
+        </div>
+
+        <div class="col-6 text-center">
+            <button class="btn btn-danger mt-5" shape="round" (click)="sendCloseModal()">
+                Cerrar
+            </button>
+        </div>
+
+        <div class="col-6 text-center">
+            <button class="btn btn-success mt-5" shape="round" (click)="goMap()">
+                Ver mi ubicación
+            </button>
+        </div>
+    </div>
+
+</div>
