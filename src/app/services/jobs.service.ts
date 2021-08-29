@@ -13,8 +13,8 @@ export class JobsService {
   constructor(public http: HttpClient) { }
 
   // *************************** para obtener todos los usuarios ****************************************************
-  getJobs() : Observable<any>{
-    const endpoint = `${this.apiUrl}/jobs`;
+  getJobs(id: number) : Observable<any>{
+    const endpoint = `${this.apiUrl}/jobs?page=${id}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('Token')

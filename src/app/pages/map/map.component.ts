@@ -16,6 +16,9 @@ export class MapComponent implements OnInit {
   public pushbar:any
   public boxShadow = false
 
+  public currentPage: number = 1;
+  public pageSize: number = 0;
+
   map:any;
   markers: Marker[] = [];
 
@@ -28,11 +31,11 @@ export class MapComponent implements OnInit {
 		});
 
     this.loadMap();
-    this.jobsData();
+    this.jobsData('init');
   }
 
   asideClicked(){
-    this.pushbar.close()
+    //this.pushbar.close()
     this.boxShadow = !this.boxShadow
   }
 
@@ -78,10 +81,30 @@ export class MapComponent implements OnInit {
     this.map.setZoom(6);
   }
 
-  jobsData() {
-    this.jobsService.getJobs().subscribe((res) => {
-      this.markers = res.data;
-      this.renderMarkers();
-    })
+  jobsData(type:any = '') {
+    if(type === 'previous') {
+      console.log('previous')
+      this.currentPage--
+      this.jobsService.getJobs(this.currentPage).subscribe((res) => {
+        this.markers = res.data;
+        console.log(res.data)
+        this.renderMarkers();
+      })
+    } else if (type === 'next') {
+      console.log('next')
+      console.log(this.markers.length)
+      this.currentPage++
+      this.jobsService.getJobs(this.currentPage).subscribe((res) => {
+        this.markers = res.data;
+        this.pageSize = res.last_page;
+        this.renderMarkers();
+      })
+    } else if (type === 'init') {
+      console.log('init')
+      this.jobsService.getJobs(this.currentPage).subscribe((res) => {
+        this.markers = res.data;
+        this.renderMarkers();
+      })
+    }
   }
 }
