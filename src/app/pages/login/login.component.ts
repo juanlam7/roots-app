@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
       }
     }, (err) => {
       console.log(err)
+      alert('Por favor verifique los datos');
       // dismiss loading
       this.loginForm.reset();
     });

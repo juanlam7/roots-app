@@ -3,37 +3,37 @@
 
     <div class="row justify-content-center">
 
-        <div class="col-6 text-center">
+        <div class="col-4 text-start">
             Nombre:
         </div>
-        <div class="col-6 text-center">
+        <div class="col-8 text-start">
             {{userData?.name}}
         </div>
 
-        <div class="col-6 text-center mt-2">
+        <div class="col-4 text-start mt-2">
             Correo:
         </div>
-        <div class="col-6 text-center mt-2">
+        <div class="col-8 text-start mt-2">
             {{userData?.email}}
         </div>
 
-        <div class="col-6 text-center mt-2">
+        <div class="col-4 text-start mt-2">
             Mi ubicación:
         </div>
-        <div class="col-6 text-center mt-2">
+        <div class="col-8 text-start mt-2">
             lat: {{userCoordenates?.latitude}}
             <br>
             lng: {{userCoordenates?.longitude}}
         </div>
 
-        <div class="col-6 text-center">
-            <button class="btn btn-danger mt-5" shape="round" (click)="sendCloseModal()">
+        <div class="col-4 text-center">
+            <button class="btn btn-danger mt-3" shape="round" (click)="sendCloseModal()">
                 Cerrar
             </button>
         </div>
 
-        <div class="col-6 text-center">
-            <button class="btn btn-success mt-5" shape="round" (click)="goMap()">
+        <div class="col-8 text-center">
+            <button class="btn btn-success mt-3" shape="round" (click)="goMap()">
                 Ver mi ubicación
             </button>
         </div>
