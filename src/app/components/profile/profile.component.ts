@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
       this.userData = data;
       //console.log(data)
       if (!this.userData.name) {
+        alert('Su sesión ha expirado, por favor inicie sesión nuevamente')
         localStorage.clear();
         this._router.navigate(['/']);
       } 
